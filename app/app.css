@@ -7,9 +7,117 @@
 
 html,
 body {
-  @apply bg-white dark:bg-gray-950;
+  @apply bg-white text-gray-900;
+}
 
-  @media (prefers-color-scheme: dark) {
-    color-scheme: dark;
-  }
+/* Dark mode styles */
+.dark {
+  --color-bg: #000000;
+  --color-text: #ffffff;
+  --color-border: #333333;
+  --color-hover: #333333;
+}
+
+.dark body {
+  @apply bg-black text-white;
+}
+
+.dark .bg-white {
+  background-color: #000000;
+}
+
+.dark .text-gray-900 {
+  color: #ffffff;
+}
+
+.dark .text-gray-600 {
+  color: #cccccc;
+}
+
+.dark .text-gray-700 {
+  color: #dddddd;
+}
+
+.dark .border-gray-200 {
+  border-color: #333333;
+}
+
+.dark .border-gray-300 {
+  border-color: #444444;
+}
+
+.dark .bg-gray-100 {
+  background-color: #111111;
+}
+
+.dark .bg-gray-50 {
+  background-color: #000000;
+}
+
+.dark .prose {
+  --tw-prose-body: #cccccc;
+  --tw-prose-headings: #ffffff;
+  --tw-prose-lead: #cccccc;
+  --tw-prose-links: #ffffff;
+  --tw-prose-bold: #ffffff;
+  --tw-prose-counters: #cccccc;
+  --tw-prose-bullets: #444444;
+  --tw-prose-hr: #333333;
+  --tw-prose-quotes: #cccccc;
+  --tw-prose-quote-borders: #333333;
+  --tw-prose-captions: #cccccc;
+  --tw-prose-code: #ffffff;
+  --tw-prose-pre-code: #cccccc;
+  --tw-prose-pre-bg: #111111;
+  --tw-prose-th-borders: #333333;
+  --tw-prose-td-borders: #333333;
+}
+
+/* Custom styles for the storefront */
+.prose {
+  max-width: none;
+}
+
+.prose h2 {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.prose p {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+/* Marquee animation for promo text */
+@keyframes marquee {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+
+.animate-marquee {
+  display: inline-block;
+  animation: marquee 20s linear infinite;
+}
+
+/* Ensure form elements adapt to dark mode */
+.dark input,
+.dark textarea {
+  background-color: #000000;
+  color: #ffffff;
+  border-color: #333333;
+}
+
+.dark input:focus,
+.dark textarea:focus {
+  border-color: #666666;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1);
+}
+
+/* Ensure buttons adapt to dark mode */
+.dark button {
+  color: #ffffff;
+}
+
+.dark .border {
+  border-color: #333333;
 }
