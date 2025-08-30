@@ -1,12 +1,8 @@
 import type { Route } from "./+types/home";
-import { Hero } from "../components/Hero";
-import { ProductGrid } from "../components/ProductGrid";
-import { Features } from "../components/Features";
-import { Newsletter } from "../components/Newsletter";
-import { Testimonials } from "../components/Testimonials";
-import { Categories } from "../components/Categories";
-import { PromotionalBanner } from "../components/PromotionalBanner";
-import { AboutBrand } from "../components/AboutBrand";
+import { useLoaderData } from "react-router";
+import { AISection } from "../components/AISection";
+import { getSectionsByPageType } from "../lib/db/sections";
+import { getAllProducts, getAllCategories } from "../lib/db/products";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -15,17 +11,30 @@ export function meta({}: Route.MetaArgs) {
   ];
 }
 
+export async function loader() {
+  // Get sections for the home page from the database
+  const sections = await getSectionsByPageType("home");
+  
+  // Get products and categories for sections that need them
+  const products = await getAllProducts();
+  const categories = await getAllCategories();
+  
+  return { sections, products, categories };
+}
+
 export default function Home() {
+  const { sections, products, categories } = useLoaderData<typeof loader>();
+  
   return (
     <>
-      <Hero />
-      <Categories />
-      <ProductGrid />
-      <PromotionalBanner />
-      <Features />
-      <Testimonials />
-      <AboutBrand />
-      <Newsletter />
+      {sections.map((section) => (
+        <AISection 
+          key={section.id} 
+          section={section} 
+          products={section.section_type === "product_showcase" ? products : undefined}
+          categories={section.section_type === "categories" ? categories : undefined}
+        />
+      ))}
     </>
   );
 }

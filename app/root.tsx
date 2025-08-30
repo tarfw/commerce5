@@ -12,6 +12,10 @@ import "./app.css";
 import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
 import { TopInfoBar } from "./components/TopInfoBar";
+import { initializeDatabase } from "./lib/db/client";
+
+// Initialize the database when the app starts
+initializeDatabase().catch(console.error);
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
